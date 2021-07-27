@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\CategoryController;
 
 /*
 |--------------------------------------------------------------------------
@@ -19,4 +20,15 @@ Route::get('/', function () {
 
 Auth::routes();
 
+Route::get('/index', function(){
+    return view('admin.dashboard');
+});
+
+Route::get('/index2', function(){
+    return view('test');
+});
+
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+
+Route::resource('category', CategoryController::class);
