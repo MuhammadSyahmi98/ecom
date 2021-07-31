@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\ProductController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\SubCategoryController;
 
@@ -31,7 +32,11 @@ Route::get('/index2', function(){
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
+Route::get('/subcategories/{id}', [ProductController::class, 'loadSubCategories']);
+
 
 Route::resource('category', CategoryController::class);
 
 Route::resource('subcategory', SubCategoryController::class);
+
+Route::resource('product', ProductController::class);
