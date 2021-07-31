@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Category;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class CategoryController extends Controller
 {
@@ -15,7 +16,8 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        //
+        $categories = Category::get();
+        return view('admin.category.index', ['categories'=>$categories]);
     }
 
     /**
@@ -72,7 +74,8 @@ class CategoryController extends Controller
      */
     public function edit($id)
     {
-        //
+        $category = Category::findOrFail($id);
+        return view('admin.category.edit', ['category'=>$category]);
     }
 
     /**
@@ -84,7 +87,19 @@ class CategoryController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $category = Category::findOrFail($id);
+        $image = $category->image;
+        if($request->hasFile('image')){
+            $image = $request->file('image')->store('public/files');
+            Storage::delete($category->image);
+        }
+        $category->name = $request->name;
+        $category->description = $request->description;
+        $category->image = $image;
+        $category->save();
+
+        return redirect()->route('category.index')->with('message', 'Successfully updated the category');
+
     }
 
     /**
@@ -95,6 +110,12 @@ class CategoryController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $category = Category::find($id);
+        $filename = $category->image;
+        $category->delete();
+        Storage::delete($filename);
+
+        return redirect()->route('category.index')->with('message', 'Successfully deleted the category');
+        
     }
 }

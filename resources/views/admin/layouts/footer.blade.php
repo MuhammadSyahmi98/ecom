@@ -14,6 +14,12 @@
   <script src="{{ asset('vendor/js/ruang-admin.min.js') }}"></script>
   <script src="{{ asset('vendor/vendor/chart.js/Chart.min.js') }}"></script>
   <script src="{{ asset('vendor/js/demo/chart-area-demo.js') }}"></script>  
+
+  <script type="text/javascript">
+      function confirmDelete() {
+        return confirm('Are you sure you want to delete?');
+      }
+  </script>
 </body>
 
 </html>
