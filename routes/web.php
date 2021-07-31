@@ -23,17 +23,21 @@ Route::get('/', function () {
 Auth::routes();
 
 
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+ROute::group([ 'middleware'=>['auth','isAdmin']], function() {
 
 
 
-
-Route::get('/index', function(){
+Route::get('/dasboard', function(){
     return view('admin.dashboard');
 });
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
 
 Route::get('/subcategories/{id}', [ProductController::class, 'loadSubCategories']);
+
+
 
 
 Route::resource('category', CategoryController::class);
@@ -41,5 +45,7 @@ Route::resource('category', CategoryController::class);
 Route::resource('subcategory', SubCategoryController::class);
 
 Route::resource('product', ProductController::class);
+
+});
 
 
