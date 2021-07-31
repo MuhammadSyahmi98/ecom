@@ -31,6 +31,21 @@
         </div>
       </li>
       <li class="nav-item">
+        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseBootstrap1"
+          aria-expanded="true" aria-controls="collapseBootstrap"1>
+          <i class="far fa-fw fa-window-maximize"></i>
+          <span>Sub Category</span>
+        </a>
+        <div id="collapseBootstrap1" class="collapse" aria-labelledby="headingBootstrap" data-parent="#accordionSidebar">
+          <div class="bg-white py-2 collapse-inner rounded">
+            <h6 class="collapse-header">Sub Category</h6>
+            <a class="collapse-item" href="{{ route('subcategory.index') }}">List of sub category</a>
+            <a class="collapse-item" href="{{ route('subcategory.create') }}">Create sub category</a>
+            
+          </div>
+        </div>
+      </li>
+      <li class="nav-item">
         <a class="nav-link" href="forms.html">
           <i class="fab fa-fw fa-wpforms"></i>
           <span>Forms</span>
