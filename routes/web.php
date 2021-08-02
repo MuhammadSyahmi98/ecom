@@ -21,13 +21,16 @@ use App\Http\Controllers\FrontProductListController;
 //     return view('product');
 // });
 
-Route::get('/', [FrontProductListController::class, 'index']);
+Route::get('/', [FrontProductListController::class, 'index'])->name('products');
 
 
 Auth::routes();
 
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+Route::get('/product/{id}', [FrontProductListController::class, 'show'])->name('product.view');
+Route::get('/{name}', [FrontProductListController::class, 'showCategory'])->name('product-list');
 
 ROute::group([ 'middleware'=>['auth','isAdmin']], function() {
 
