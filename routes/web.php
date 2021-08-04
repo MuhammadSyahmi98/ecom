@@ -32,6 +32,8 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 Route::get('/product/{id}', [FrontProductListController::class, 'show'])->name('product.view');
 Route::get('/{name}', [FrontProductListController::class, 'showCategory'])->name('product-list');
 
+RouteL::get('/adToCart/{product}', [CartController::class,'addToCart'])->name('add.cart');
+
 ROute::group([ 'middleware'=>['auth','isAdmin']], function() {
 
 

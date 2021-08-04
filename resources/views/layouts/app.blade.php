@@ -16,6 +16,10 @@
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
 
+    <link href="{{ asset('vendor/vendor/fontawesome-free/css/all.min.css') }}" rel="stylesheet" type="text/css">
+    <link href="{{ asset('vendor/vendor/bootstrap/css/bootstrap.min.css') }}" rel="stylesheet" type="text/css">
+    <link href="{{ asset('vendor/css/ruang-admin.min.css') }}" rel="stylesheet">
+
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
 </head>
@@ -24,6 +28,7 @@
         <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
             <div class="container">
                 <a class="navbar-brand" href="{{ url('/') }}">
+                
                     {{ config('app.name', 'Laravel') }}
                 </a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
@@ -79,5 +84,11 @@
             @yield('content')
         </main>
     </div>
+    <script src="{{ asset('vendor/vendor/jquery/jquery.min.js') }}"></script>
+  <script src="{{ asset('vendor/vendor/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
+  <script src="{{ asset('vendor/vendor/jquery-easing/jquery.easing.min.js') }}"></script>
+  <script src="{{ asset('vendor/js/ruang-admin.min.js') }}"></script>
+  <script src="{{ asset('vendor/vendor/chart.js/Chart.min.js') }}"></script>
+  <script src="{{ asset('vendor/js/demo/chart-area-demo.js') }}"></script>  
 </body>
 </html>

@@ -21,7 +21,6 @@
 
     <section class="container">
         <h2>Category</h2>
-
         @foreach ($categories as $category)
         <a href="{{route('product-list', $category->slug)}}"><button class="btn btn-secondary">{{ $category->name }}</button></a>
         @endforeach
