@@ -43,6 +43,13 @@
 
                     <!-- Right Side Of Navbar -->
                     <ul class="navbar-nav ml-auto">
+
+                        <a href="{{route('view.carts')}}" class="nav-link">
+                            <span class="fas fa-shopping-cart">
+                                ({{session()->has('cart')?session()->get('cart')->totalQuantity:'0'}})
+                            </span>
+                        </a>
+
                         <!-- Authentication Links -->
                         @guest
                             @if (Route::has('login'))

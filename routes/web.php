@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\CartController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\SubCategoryController;
@@ -25,14 +26,18 @@ Route::get('/', [FrontProductListController::class, 'index'])->name('products');
 
 
 Auth::routes();
-
+Route::get('/carts', [CartController::class, 'showCart'])->name('view.carts');
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 Route::get('/product/{id}', [FrontProductListController::class, 'show'])->name('product.view');
 Route::get('/{name}', [FrontProductListController::class, 'showCategory'])->name('product-list');
 
-RouteL::get('/adToCart/{product}', [CartController::class,'addToCart'])->name('add.cart');
+Route::get('/adToCart/{product}', [CartController::class,'addToCart'])->name('add.cart');
+
+Route::post('/products/{product}', [CartController::class, 'updateCart'])->name('update.cart');
+Route::post('/product/{product}', [CartController::class, 'removeCart'])->name('remove.cart');
+
 
 ROute::group([ 'middleware'=>['auth','isAdmin']], function() {
 
