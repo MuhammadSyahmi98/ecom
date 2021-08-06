@@ -60,4 +60,16 @@ class CartController extends Controller
 
       return redirect()->back()->with('message', 'Success remove cart');
    }
+
+
+   public function checkout($amount){
+      if(session()->has('cart')){
+         $cart = new Cart(session()->get('cart'));
+      }else{
+         $cart = null;
+      }
+
+   
+      return view('checkout', ['amount'=>$amount, 'cart'=>$cart]);
+   }
 }
