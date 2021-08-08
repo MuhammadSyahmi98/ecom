@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CartController;
+use App\Http\Controllers\UserController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\ToyyibpayController;
@@ -69,7 +70,7 @@ Route::get('/dasboard', function(){
 Route::get('/subcategories/{id}', [ProductController::class, 'loadSubCategories']);
 
 
-
+Route::get('/user', [UserController::class, 'index'])->name('show.users');
 
 Route::resource('category', CategoryController::class);
 

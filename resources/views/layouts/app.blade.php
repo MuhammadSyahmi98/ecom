@@ -53,7 +53,9 @@
                             </span>
                         </a>
                         @if(Auth::check())
-                      <li class="nav-item">  <a class="nav-link" href="{{route('showOrders')}}">Order</a></li>
+                      <li class="nav-item">  <a class="nav-link" href="{{route('showOrders')}}">Order</a>
+                    </li>
+                    
                       @endif
 
                         <!-- Authentication Links -->
@@ -89,6 +91,16 @@
                                 </div>
                             </li>
                         @endguest
+                        @if (Auth::check())
+                        <li class="nav-item"> <a class="nav-link" href="{{ route('logout') }}"
+                                       onclick="event.preventDefault();
+                                                     document.getElementById('logout-form').submit();">
+                                        {{ __('Logout') }}
+                                    </a>
+
+                    </li> 
+                        @endif
+                        
                     </ul>
                 </div>
             </div>
