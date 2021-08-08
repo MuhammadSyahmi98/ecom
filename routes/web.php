@@ -50,7 +50,7 @@ Route::post('/product/{product}', [CartController::class, 'removeCart'])->name('
 
 Route::post('/payment', [ToyyibpayController::class, 'createBill'])->name('createBill')->middleware('auth');
 
-
+Route::get('/order', [CartController::class, 'userOrders'])->name('userOrders');
 
 Route::get('/payments', [ToyyibpayController::class, 'callBack'])->name('callBack');
 
@@ -65,7 +65,7 @@ Route::get('/dasboard', function(){
     return view('admin.dashboard');
 });
 
-
+Route::get('/orders/{userid}/{orderid}', [CartController::class, 'viewUserOrder'])->name('showUserOrder');
 
 Route::get('/subcategories/{id}', [ProductController::class, 'loadSubCategories']);
 
