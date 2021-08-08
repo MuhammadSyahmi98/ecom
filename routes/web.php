@@ -1,6 +1,13 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\CartController;
+use App\Http\Controllers\UserController;
+use App\Http\Controllers\ProductController;
+use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\ToyyibpayController;
+use App\Http\Controllers\SubCategoryController;
+use App\Http\Controllers\FrontProductListController;
 
 /*
 |--------------------------------------------------------------------------
@@ -13,10 +20,64 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+// Route::get('/', function () {
+//     return view('product');
+// });
+
+Route::get('/', [FrontProductListController::class, 'index'])->name('products');
+
 
 Auth::routes();
 
+Route::get('/orders', [CartController::class, 'showOrders'])->name('showOrders')->middleware('auth');
+
+Route::get('/all/products', [FrontProductListController::class, 'moreProducts'])->name('moreProduct');
+
+Route::get('/payment', [ToyyibpayController::class, 'paymentStatus'])->name('paymentStatus');
+Route::get('/carts', [CartController::class, 'showCart'])->name('view.carts');
+
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+Route::get('/product/{id}', [FrontProductListController::class, 'show'])->name('product.view');
+Route::get('/category/{name}', [FrontProductListController::class, 'showCategory'])->name('product-list');
+
+Route::get('/adToCart/{product}', [CartController::class,'addToCart'])->name('add.cart');
+
+Route::post('/products/{product}', [CartController::class, 'updateCart'])->name('update.cart');
+Route::post('/product/{product}', [CartController::class, 'removeCart'])->name('remove.cart');
+
+
+
+Route::post('/payment', [ToyyibpayController::class, 'createBill'])->name('createBill')->middleware('auth');
+
+Route::get('/order', [CartController::class, 'userOrders'])->name('userOrders');
+
+Route::get('/payments', [ToyyibpayController::class, 'callBack'])->name('callBack');
+
+Route::get('/checkout/{amount}', [CartController::class, 'checkout'])->name('cart.checkout')->middleware('auth');
+
+
+ROute::group([ 'middleware'=>['auth','isAdmin']], function() {
+
+
+
+Route::get('/dasboard', function(){
+    return view('admin.dashboard');
+});
+
+Route::get('/orders/{userid}/{orderid}', [CartController::class, 'viewUserOrder'])->name('showUserOrder');
+
+Route::get('/subcategories/{id}', [ProductController::class, 'loadSubCategories']);
+
+
+Route::get('/user', [UserController::class, 'index'])->name('show.users');
+
+Route::resource('category', CategoryController::class);
+
+Route::resource('subcategory', SubCategoryController::class);
+
+Route::resource('product', ProductController::class);
+
+});
+
+
