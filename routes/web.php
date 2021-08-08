@@ -36,7 +36,7 @@ Route::get('/carts', [CartController::class, 'showCart'])->name('view.carts');
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 Route::get('/product/{id}', [FrontProductListController::class, 'show'])->name('product.view');
-Route::get('/{name}', [FrontProductListController::class, 'showCategory'])->name('product-list');
+Route::get('/category/{name}', [FrontProductListController::class, 'showCategory'])->name('product-list');
 
 Route::get('/adToCart/{product}', [CartController::class,'addToCart'])->name('add.cart');
 

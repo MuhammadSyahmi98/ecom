@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\SendMail;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
 
 class ToyyibpayController extends Controller
 {
@@ -12,8 +14,8 @@ class ToyyibpayController extends Controller
         ]);
 
         $some_data = array(
-            'userSecretKey'=>'secretkey',
-            'categoryCode'=>'code',
+            'userSecretKey'=>'',
+            'categoryCode'=>'',
             'billName'=>'Car Rental WXX123',
             'billDescription'=>'Car Rental WXX123 On Sunday',
             'billPriceSetting'=>1,
@@ -57,6 +59,8 @@ class ToyyibpayController extends Controller
           auth()->user()->orders()->create([
             'cart'=>serialize(session()->get('cart')),
           ]);
+
+          Mail::to(auth()->user()->email)->send(new SendMail(session()->get('cart')));
           session()->forget('cart');
           return redirect(route('view.carts'))->with('message', 'Payment Success. Orders have been recorded.');
         }else {
