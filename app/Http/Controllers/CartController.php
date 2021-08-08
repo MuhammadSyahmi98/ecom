@@ -72,4 +72,13 @@ class CartController extends Controller
    
       return view('checkout', ['amount'=>$amount, 'cart'=>$cart]);
    }
+
+   public function showOrders(){
+      $orders = auth()->user()->orders;
+       $carts = $orders->transform(function($cart, $key){
+         return unserialize($cart->cart);
+      });
+      
+      return view('order', ['carts'=>$carts]);
+   }
 }

@@ -12,8 +12,8 @@ class ToyyibpayController extends Controller
         ]);
 
         $some_data = array(
-            'userSecretKey'=>'3y02klwx-0axz-459f-8ryy-wfnq9wve8tei',
-            'categoryCode'=>'468g03ck',
+            'userSecretKey'=>'secretkey',
+            'categoryCode'=>'code',
             'billName'=>'Car Rental WXX123',
             'billDescription'=>'Car Rental WXX123 On Sunday',
             'billPriceSetting'=>1,
@@ -42,12 +42,26 @@ class ToyyibpayController extends Controller
           $result = curl_exec($curl);
           $info = curl_getinfo($curl);  
           curl_close($curl);
-          $obj = json_decode($result);
-          echo $result;
+          $result = json_decode($result, true);
+      
+
+         $some_data['billCode'] = $result[0]['BillCode'];
+         $some_data['paymentURL'] = 'https://dev.toyyibpay.com/' . $result[0]['BillCode'];
+           return redirect($some_data['paymentURL']);
                 
     }
 
-    public function paymentStatus(){
+    public function paymentStatus(Request $request){
+        // https://ecom.test/payment?status_id=1&billcode=gi0xsqei&order_id=AFR341DFI&msg=ok&transaction_id=TP74356221515614080821
+        if($request->status_id = 1){
+          auth()->user()->orders()->create([
+            'cart'=>serialize(session()->get('cart')),
+          ]);
+          session()->forget('cart');
+          return redirect(route('view.carts'))->with('message', 'Payment Success. Orders have been recorded.');
+        }else {
+          return redirect(route('view.carts'))->with('message', 'Payment Failed. Please try again');
+        }
 
     }
 

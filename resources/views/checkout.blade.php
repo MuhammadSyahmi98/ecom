@@ -28,7 +28,7 @@
       
       <td><img src="{{Storage::url($product['image'])}}" width="100"></td>
       <td>{{$product['name']}}</td>
-      <td>${{$product['price']}}</td>
+      <td>RM {{$product['price']}}</td>
       <td>
         {{$product['quantity']}}
     </td>
@@ -44,7 +44,7 @@
   </tbody>
 </table>
 <hr>
-Total Price:${{$cart->totalPrice}}
+Total Price: RM {{$cart->totalPrice}}
 </div>
 
  	<div class="col-md-6">

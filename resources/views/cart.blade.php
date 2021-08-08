@@ -10,6 +10,13 @@
    @endforeach
 
    @endif
+
+   @if(session('message'))
+            <div class="alert alert-success">
+              {{session('message')}}
+            </div>
+
+          @endif
 <table class="table">
   <thead>
     <tr>
@@ -33,7 +40,7 @@
       
       <td><img src="{{Storage::url($product['image'])}}" width="100"></td>
       <td>{{$product['name']}}</td>
-      <td>${{$product['price']}}</td>
+      <td>RM {{$product['price']}}</td>
       <td>
     <form action="{{ route('update.cart', $product['id']) }}" method="post">@csrf
       	<input type="text" name="quantity" value="{{$product['quantity']}}">
@@ -58,7 +65,7 @@
 <hr>
 <div class="card-footer">
 	<a href="{{url('/')}}"><button class="btn btn-primary">Continue shopping</button></a>
-	<span style="margin-left: 300px;">Total Price:${{$cart->totalPrice}}</span>
+	<span style="margin-left: 300px;">Total Price: RM {{$cart->totalPrice}}</span>
 
 	<a href="{{ route('cart.checkout', $cart->totalPrice) }}"><button class="btn btn-info float-right">Checkout</button></a>
 

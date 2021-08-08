@@ -27,6 +27,10 @@ Route::get('/', [FrontProductListController::class, 'index'])->name('products');
 
 
 Auth::routes();
+
+Route::get('/orders', [CartController::class, 'showOrders'])->name('showOrders')->middleware('auth');
+
+Route::get('/payment', [ToyyibpayController::class, 'paymentStatus'])->name('paymentStatus');
 Route::get('/carts', [CartController::class, 'showCart'])->name('view.carts');
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
@@ -39,9 +43,11 @@ Route::get('/adToCart/{product}', [CartController::class,'addToCart'])->name('ad
 Route::post('/products/{product}', [CartController::class, 'updateCart'])->name('update.cart');
 Route::post('/product/{product}', [CartController::class, 'removeCart'])->name('remove.cart');
 
+
+
 Route::post('/payment', [ToyyibpayController::class, 'createBill'])->name('createBill')->middleware('auth');
 
-Route::get('/payment', [ToyyibpayController::class, 'paymentStatus'])->name('paymentStatus');
+
 
 Route::get('/payments', [ToyyibpayController::class, 'callBack'])->name('callBack');
 
