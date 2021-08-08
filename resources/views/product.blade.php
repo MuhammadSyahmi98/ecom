@@ -41,6 +41,11 @@
             </div>
         </div>
     </div>
+    <center style='margin-bottom: 20px;'>
+      <a href="{{route('moreProduct')}}"><button class="btn btn-success">More Product</button>
+      </a>
+    </center>
+  
 
     <section class="container">
         <div class="jumbotron">

@@ -30,6 +30,8 @@ Auth::routes();
 
 Route::get('/orders', [CartController::class, 'showOrders'])->name('showOrders')->middleware('auth');
 
+Route::get('/all/products', [FrontProductListController::class, 'moreProducts'])->name('moreProduct');
+
 Route::get('/payment', [ToyyibpayController::class, 'paymentStatus'])->name('paymentStatus');
 Route::get('/carts', [CartController::class, 'showCart'])->name('view.carts');
 

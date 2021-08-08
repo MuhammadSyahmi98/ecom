@@ -40,7 +40,7 @@
 
     <hr>
     
-    <a href="" class="btn btn-lg btn-outline-primary text-uppercase">  Add to cart </a>
+    <a href="{{ route('add.cart', [$product->id]) }}" class="btn btn-lg btn-outline-primary text-uppercase">  Add to cart </a>
   
 
 </section> 
